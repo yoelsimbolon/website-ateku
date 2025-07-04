@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Ateku</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+      margin: 0;
+      padding: 0;
+      color: #22223b;
+      min-height: 100vh;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #5f6caf;
+      text-align: center;
+      margin-top: 32px;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px #bfcfff80;
+      animation: fadeInDown 1s;
+    }
+    h2 {
+      color: #3d405b;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+      border-left: 6px solid #5f6caf;
+      padding-left: 12px;
+      background: #e0e7ff80;
+      border-radius: 0 12px 12px 0;
+      animation: fadeInLeft 1s;
+    }
+    #menuList {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .menu-item {
+      cursor: pointer;
+      margin: 0;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      background: #fff;
+      box-shadow: 0 4px 18px #5f6caf18, 0 1.5px 4px #22223b0d;
+      transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.7s;
+    }
+    .menu-item:hover {
+      background: linear-gradient(90deg, #e0e7ff 0%, #fff 100%);
+      transform: scale(1.025) translateY(-2px) rotate(-1deg);
+      box-shadow: 0 8px 32px #5f6caf33, 0 2px 8px #22223b18;
+    }
+    .menu-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #5f6caf22;
+      border: 2.5px solid #e0e7ff;
+      transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+      background: #f8fafc;
+    }
+    .menu-item:hover img {
+      transform: scale(1.08) rotate(-2deg);
+      border-color: #5f6caf;
+    }
+    .menu-item div {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #22223b;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px #e0e7ff80;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 36px 0 24px 0;
+      animation: fadeInUp 1.2s;
+    }
+    nav a {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      background: linear-gradient(90deg, #5f6caf 60%, #a3bffa 100%);
+      padding: 12px 32px;
+      border-radius: 24px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px #5f6caf33;
+      transition: background 0.2s, transform 0.18s;
+      letter-spacing: 1px;
+    }
+    nav a:hover {
+      background: linear-gradient(90deg, #a3bffa 0%, #5f6caf 100%);
+      transform: scale(1.07) translateY(-2px);
+      box-shadow: 0 4px 16px #5f6caf44;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    /* Ripple effect on click */
+    .menu-item:active::after {
+      content: '';
+      position: absolute;
+      left: var(--ripple-x, 50%);
+      top: var(--ripple-y, 50%);
+      width: 0;
+      height: 0;
+      background: rgba(95, 108, 175, 0.18);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: ripple 0.5s linear;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes ripple {
+      to {
+        width: 250px;
+        height: 250px;
+        opacity: 0;
+      }
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 10px;
+      }
+      .menu-item img {
+        width: 70px;
+        height: 70px;
+      }
+      #menuList {
+        padding: 0 4px;
+      }
+    }
+  </style>
+</head>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Ateku</title>
+  <style>
+    .menu-item {
+      cursor: pointer;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: background 0.3s;
+    }
+    .menu-item:hover {
+      background: #f0f0f0;
+    }
+    .menu-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Daftar Menu Ateku</h1>
+  <h2>Hotplate</h2>
+  <div id="menuList">
+    <div class="menu-item" data-id="1" data-name="HOTPLATE CHICKEN STEAK" data-price="21000" data-image="images/chicken-steak-hotplate.jpg">
+      <img src="images/chicken-steak-hotplate.jpg" alt="CHICKEN STEAK HOTPLATE" />
+      <div>
+        CHICKEN STEAK HOTPLATE – Rp 21.000
+      </div>
+    </div>
+    <div class="menu-item" data-id="2" data-name="HOTPLATE BLACKPAPER" data-price="26000" data-image="images/hotplate_blackpaper.jpg">
+      <img src="images/hotplate_blackpaper.jpg" alt="HOTPLATE BLACKPAPER" />
+      <div>
+        HOTPLATE BLACKPAPER / FIREHOUSE – Rp 26.000
+      </div>
+    </div>
+    <div class="menu-item" data-id="3" data-name="HOTPLATE NASI CHICKEN RICE WITH EGG" data-price="26000" data-image="images/hotplate_nasi_chicken_egg.jpg">
+  <img src="images/hotplate_nasi_chicken_egg.jpg" alt="HOTPLATE NASI CHICKEN RICE WITH EGG" />
+  <div>
+    HOTPLATE NASI CHICKEN RICE WITH EGG – Rp 26.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="4" data-name="HOTPLATE CHICKEN CURRY" data-price="26000" data-image="images/hotplate_chicken_curry.jpg">
+  <img src="images/hotplate_chicken_curry.jpg" alt="HOTPLATE CHICKEN CURRY" />
+  <div>
+    HOTPLATE CHICKEN CURRY – Rp 26.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="5" data-name="HOTPLATE MIE GAO-MAO" data-price="35000" data-image="images/hotplate_mie_gaomao.jpg">
+  <img src="images/hotplate_mie_gaomao.JPEG" alt="HOTPLATE MIE GAO-MAO" />
+  <div>
+    HOTPLATE MIE GAO-MAO – Rp 35.000
+  </div>
+</div>
+<h2>Nasi Goreng</h2>
+<div class="menu-item" data-id="6" data-name="Nasi Goreng Telur" data-price="12000" data-image="images/nasi_goreng_telur.jpg">
+  <img src="images/nasi_goreng_telur.jpg" alt="Nasi Goreng Telur" />
+  <div>
+    Nasi Goreng Telur – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="7" data-name="Nasi Goreng Pete / Udang" data-price="18000" data-image="images/nasi_goreng_pete_udang.jpg">
+  <img src="images/nasi_goreng_pete_udang.jpg" alt="Nasi Goreng Pete / Udang" />
+  <div>
+    Nasi Goreng Pete / Udang – Rp 18.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="8" data-name="Nasi Goreng Ikan Asin" data-price="18000" data-image="images/nasi_goreng_ikan_asin.jpg">
+  <img src="images/nasi_goreng_ikan_asin.jpg" alt="Nasi Goreng Ikan Asin" />
+  <div>
+    Nasi Goreng Ikan Asin – Rp 18.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="9" data-name="Nasi Goreng Seafood" data-price="22000" data-image="images/nasi_goreng_seafood.jpg">
+  <img src="images/nasi_goreng_seafood.jpg" alt="Nasi Goreng Seafood" />
+  <div>
+    Nasi Goreng Seafood – Rp 22.000
+  </div>
+</div>
+<h2>Cemilan / Indomie</h2>
+<div class="menu-item" data-id="10" data-name="Chicken Pop Black" data-price="12000" data-image="images/chicken_pop_black.jpg">
+  <img src="images/chicken_pop_black.jpeg" alt="Chicken Pop Black" />
+  <div>
+    Chicken Pop Black – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="11" data-name="Kentang Goreng" data-price="12000" data-image="images/kentang_goreng.jpg">
+  <img src="images/kentang_goreng.jpg" alt="Kentang Goreng" />
+  <div>
+    Kentang Goreng – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="12" data-name="Batagor / Siomay Special" data-price="12000" data-image="images/batagor_siomay_special.jpg">
+  <img src="images/batagor_siomay_special.jpeg" alt="Batagor / Siomay Special" />
+  <div>
+    Batagor / Siomay Special – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="13" data-name="Rujak Goreng" data-price="12000" data-image="images/rujak_goreng.jpg">
+  <img src="images/rujak_goreng.jpeg" alt="Rujak Goreng" />
+  <div>
+    Rujak Goreng – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="14" data-name="Tempura Mayo" data-price="12000" data-image="images/tempura_mayo.jpg">
+  <img src="images/tempura_mayo.jpg" alt="Tempura Mayo" />
+  <div>
+    Tempura Mayo – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="15" data-name="Sosis / Sosis" data-price="12000" data-image="images/sosis.jpg">
+  <img src="images/sosis.jpg" alt="Sosis / Sosis" />
+  <div>
+    Sosis / Sosis – Rp 12.000
+  </div>
+</div>
+<h2>Nasi</h2>
+<div class="menu-item" data-id="16" data-name="Nasi Tanggal Tua" data-price="10000" data-image="images/nasi_tanggal_tua.jpg">
+  <img src="images/nasi_tanggal_tua.jpeg" alt="Nasi Tanggal Tua" />
+  <div>
+    Nasi Tanggal Tua – Rp 10.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="17" data-name="Nasi Ayam Penyet Ayam Kelem" data-price="15000" data-image="images/nasi_ayam_penyet_kelem.jpg">
+  <img src="images/nasi_ayam_penyet_kelem.jpg" alt="Nasi Ayam Penyet Ayam Kelem" />
+  <div>
+    Nasi Ayam Penyet Ayam Kelem – Rp 15.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="18" data-name="Nasi Ayam Geprek Ayam Kelem" data-price="16000" data-image="images/nasi_ayam_geprek_kelem.jpg">
+  <img src="images/nasi_ayam_geprek_kelem.jpg" alt="Nasi Ayam Geprek Ayam Kelem" />
+  <div>
+    Nasi Ayam Geprek Ayam Kelem – Rp 16.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="19" data-name="Nasi Ayam Vietnam" data-price="17000" data-image="images/nasi_ayam_vietnam.jpg">
+  <img src="images/nasi_ayam_vietnam.webp" alt="Nasi Ayam Vietnam" />
+  <div>
+    Nasi Ayam Vietnam – Rp 17.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="20" data-name="Nasi Ayam Terong" data-price="16000" data-image="images/nasi_ayam_terong.jpg">
+  <img src="images/nasi_ayam_terong.jpg" alt="Nasi Ayam Terong" />
+  <div>
+    Nasi Ayam Terong – Rp 16.000
+  </div>
+</div>
+<h2>Paket Hemat / Lulupor</h2>
+<div class="menu-item" data-id="21" data-name="Paket Biasa" data-price="19000" data-image="images/paket_biasa.jpg">
+  <img src="images/paket_biasa.jpg" alt="Paket Biasa" />
+  <div>
+    Paket Biasa – Rp 19.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="22" data-name="Paket Ayam Campus (Free Ice Tea)" data-price="21000" data-image="images/paket_ayam_campus.jpg">
+  <img src="images/paket_ayam_campus.jpeg" alt="Paket Ayam Campus" />
+  <div>
+    Paket Ayam Campus (Free Ice Tea) – Rp 21.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="23" data-name="Paket Geledek (Free Ice Tea)" data-price="23000" data-image="images/paket_geledek.jpg">
+  <img src="images/paket_geledek.jpg" alt="Paket Geledek" />
+  <div>
+    Paket Geledek (Free Ice Tea) – Rp 23.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="24" data-name="Paket Sangu (Free Ice Tea)" data-price="25000" data-image="images/paket_sangu.jpg">
+  <img src="images/paket_sangu.jpeg" alt="Paket Sangu" />
+  <div>
+    Paket Sangu (Free Ice Tea) – Rp 25.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="25" data-name="Paket Tetaplah" data-price="25000" data-image="images/paket_tetaplah.jpg">
+  <img src="images/paket_tetaplah.jpg" alt="Paket Tetaplah" />
+  <div>
+    Paket Tetaplah – Rp 25.000
+  </div>
+</div>
+<h2>Masakan Mamak</h2>
+<div class="menu-item" data-id="26" data-name="Sayur Asam" data-price="19000" data-image="images/sayur_asam.jpg">
+  <img src="images/sayur_asam.jpg" alt="Sayur Asam" />
+  <div>
+    Sayur Asam – Rp 19.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="27" data-name="Telur" data-price="20000" data-image="images/telur.jpg">
+  <img src="images/telur.jpg" alt="Telur" />
+  <div>
+    Telur – Rp 20.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="28" data-name="Ram" data-price="18000" data-image="images/ram.jpg">
+  <img src="images/ram.jpg" alt="Ram" />
+  <div>
+    Ram – Rp 18.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="29" data-name="Ikan" data-price="18000" data-image="images/ikan.jpg">
+  <img src="images/ikan.webp" alt="Ikan" />
+  <div>
+    Ikan – Rp 18.000
+  </div>
+</div>
+<h2>Mie</h2>
+<div class="menu-item" data-id="30" data-name="Ifume Goreng" data-price="15000" data-image="images/ifume_goreng.jpg">
+  <img src="images/ifume_goreng.jpg" alt="Ifume Goreng" />
+  <div>
+    Ifume Goreng – Rp 15.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="31" data-name="Ifume Kuah" data-price="15000" data-image="images/ifume_kuah.jpg">
+  <img src="images/ifume_kuah.jpeg" alt="Ifume Kuah" />
+  <div>
+    Ifume Kuah – Rp 15.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="32" data-name="Samal Putih" data-price="18000" data-image="images/samal_putih.jpg">
+  <img src="images/samal_putih.jpg" alt="Samal Putih" />
+  <div>
+    Samal Putih – Rp 18.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="33" data-name="Indomie Ayam / Goreng Telor" data-price="12000" data-image="images/indomie_goreng_telor.jpg">
+  <img src="images/indomie_goreng_telor.jpeg" alt="Indomie Ayam / Goreng Telor" />
+  <div>
+    Indomie Ayam / Goreng Telor – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="34" data-name="Mie Gila" data-price="15000" data-image="images/mie_gila.jpg">
+  <img src="images/mie_gila.webp" alt="Mie Gila" />
+  <div>
+    Mie Gila – Rp 15.000
+  </div>
+</div>
+
+<h2>Burger</h2>
+<div class="menu-item" data-id="35" data-name="Burger Royal" data-price="12000" data-image="images/burger_royal.jpg">
+  <img src="images/burger_royal.webp" alt="Burger Royal" />
+  <div>
+    Burger Royal – Rp 12.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="36" data-name="Burger Ayam Crispy" data-price="15000" data-image="images/burger_ayam_crispy.jpg">
+  <img src="images/burger_ayam_crispy.jpg" alt="Burger Ayam Crispy" />
+  <div>
+    Burger Ayam Crispy – Rp 15.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="37" data-name="Burger Cheese Royal" data-price="15000" data-image="images/burger_cheese_royal.jpg">
+  <img src="images/burger_cheese_royal.jpeg" alt="Burger Cheese Royal" />
+  <div>
+    Burger Cheese Royal – Rp 15.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="38" data-name="Burger Royal + Kentang" data-price="17000" data-image="images/burger_royal_kentang.jpg">
+  <img src="images/burger_royal_kentang.jpg" alt="Burger Royal + Kentang" />
+  <div>
+    Burger Royal + Kentang – Rp 17.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="39" data-name="Burger Ayam Crispy + Kentang" data-price="19000" data-image="images/burger_ayam_crispy_kentang.jpg">
+  <img src="images/burger_ayam_crispy_kentang.jpg" alt="Burger Ayam Crispy + Kentang" />
+  <div>
+    Burger Ayam Crispy + Kentang – Rp 19.000
+  </div>
+</div>
+
+<h2>DAFTAR MINUMAN ATEKU</h2>
+<div class="menu-item" data-id="40" data-name="Espresso" data-price="20000" data-image="images/espresso.jpg">
+  <img src="images/espresso.webp" alt="Espresso" />
+  <div>
+    Espresso – Rp 20.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="41" data-name="Affogato" data-price="25000" data-image="images/affogato.jpg">
+  <img src="images/affogato.jpg" alt="Affogato" />
+  <div>
+    Affogato – Rp 25.000
+  </div>
+</div>
+
+<div class="menu-item" data-id="42" data-name="Cappucino" data-price="20000" data-image="images/cappucino.jpg">
+  <img src="images/cappucino.jpg" alt="Cappucino" />
+  <div>
+    Cappucino – Rp 20.000
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- Tambah item menu lain dengan format yang sama -->
+  </div>
+    <nav>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  <script>
+  // Fungsi menambahkan item ke keranjang
+  function tambahKeKeranjang(item) {
+    // Ambil keranjang dari localStorage atau buat array baru
+    let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+
+    // Cek apakah item sudah ada, kalau ada tambahkan jumlahnya
+    let index = keranjang.findIndex(i => i.id === item.id);
+    if (index > -1) {
+      keranjang[index].jumlah += 1;
+    } else {
+      keranjang.push({...item, jumlah: 1});
+    }
+
+    // Simpan kembali ke localStorage
+    localStorage.setItem('keranjang', JSON.stringify(keranjang));
+
+    alert(item.name + " berhasil ditambahkan ke keranjang!");
+  }
+
+  // Tambahkan event listener ke semua item menu
+  document.querySelectorAll('.menu-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const item = {
+        id: el.dataset.id,
+        name: el.dataset.name,
+        price: parseInt(el.dataset.price),
+        image: el.dataset.image
+      };
+      tambahKeKeranjang(item);
+    });
+  });
+</script>
+</body>
+</html>

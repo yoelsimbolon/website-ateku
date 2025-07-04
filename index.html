@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Pemesanan Ateku</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1c27d 100%);
+      margin: 0;
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: #ffb347;
+      color: #fff;
+      padding: 24px 0 16px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      text-align: center;
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-shadow: 1px 2px 8px #e6a04b70;
+      font-family: 'Pacifico', cursive, sans-serif;
+      animation: popIn 1s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    nav {
+      margin-top: 8px;
+      animation: fadeInDown 1.2s 0.3s backwards;
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 18px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    nav a:hover {
+      background: #fff;
+      color: #ffb347;
+      box-shadow: 0 2px 8px #e6a04b30;
+      transform: scale(1.08) rotate(-2deg);
+    }
+    /* Floating food icons animation */
+    .floating-food {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      opacity: 0.7;
+      z-index: 0;
+      animation: floatFood 8s linear infinite;
+      pointer-events: none;
+    }
+    .floating-food:nth-child(1) {
+      left: 10%;
+      top: 10px;
+      animation-delay: 0s;
+    }
+    .floating-food:nth-child(2) {
+      left: 80%;
+      top: 30px;
+      animation-delay: 2s;
+    }
+    .floating-food:nth-child(3) {
+      left: 50%;
+      top: 0px;
+      animation-delay: 4s;
+    }
+    @keyframes floatFood {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      50% { transform: translateY(30px) scale(1.1) rotate(10deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+    main {
+      max-width: 500px;
+      margin: 48px auto 0 auto;
+      background: #fffbe7;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px #e6a04b30;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1.2s 0.6s backwards;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: #e67e22;
+      font-weight: 700;
+      animation: bounceIn 1.1s 0.8s backwards;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.7); opacity: 0;}
+      60% { transform: scale(1.1);}
+      80% { transform: scale(0.95);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    main p {
+      font-size: 1.2rem;
+      color: #555;
+      animation: fadeIn 1.4s 1s backwards;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0;}
+      100% { opacity: 1;}
+    }
+    /* Animated button style */
+    .btn-order {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 36px;
+      background: linear-gradient(90deg, #ffb347 60%, #e67e22 100%);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px #e6a04b30;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s;
+      animation: pulseBtn 2s infinite;
+      letter-spacing: 1px;
+    }
+    .btn-order:hover {
+      transform: scale(1.07) translateY(-2px);
+      box-shadow: 0 8px 24px #e6a04b40;
+      background: linear-gradient(90deg, #e67e22 60%, #ffb347 100%);
+    }
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 4px 16px #e6a04b30;}
+      50% { box-shadow: 0 8px 32px #e6a04b60;}
+    }
+    footer {
+      margin-top: 48px;
+      background: #f1c27d;
+      color: #fff;
+      text-align: center;
+      padding: 18px 0;
+      font-size: 1rem;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -2px 8px #e6a04b30;
+      letter-spacing: 1px;
+      animation: fadeIn 1.2s 1.2s backwards;
+    }
+  </style>
+</head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Pemesanan Ateku</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Ateku</h1>
+    <nav>
+      <a href="menu.html">Menu</a>
+      <a href="keranjang.html">Keranjang</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Selamat Datang di Web Pemesanan Ateku!</h2>
+    <p>Pilih makanan favoritmu sekarang juga!</p>
+  </main>
+  <footer>
+    <p>&copy; pesan torus ###ribakkkk</p>
+  </footer>
+</body>
+</html>

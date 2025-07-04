@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Keranjang Pesanan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', Arial, sans-serif;
+      background: linear-gradient(135deg, #fffbe6 0%, #ffe5b4 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      color: #e67e22;
+      margin-top: 32px;
+      font-size: 2.3rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 2px 0 #fff3e0;
+      animation: fadeInDown 1s;
+    }
+    #cartItems {
+      max-width: 600px;
+      margin: 32px auto 24px auto;
+      background: #fffdfa;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(230, 126, 34, 0.09);
+      padding: 24px 18px;
+      min-height: 120px;
+      animation: fadeInUp 1.2s;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border-bottom: 1px solid #ffe0b2;
+      padding: 16px 0;
+      background: rgba(255, 243, 224, 0.5);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(230, 126, 34, 0.04);
+      transition: transform 0.2s;
+      animation: popIn 0.5s;
+    }
+    .cart-item:hover {
+      transform: scale(1.025);
+      box-shadow: 0 6px 18px rgba(230, 126, 34, 0.10);
+      background: #fff3e0;
+    }
+    .cart-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #ffb366;
+      box-shadow: 0 2px 8px #ffe0b2;
+      background: #fff;
+      animation: foodBounce 1.2s;
+    }
+    .cart-item-info {
+      flex-grow: 1;
+      color: #6d4c1b;
+      font-size: 1.08rem;
+    }
+    .cart-item-info strong {
+      color: #e67e22;
+      font-size: 1.13rem;
+      letter-spacing: 0.5px;
+    }
+    .remove-btn {
+      background: linear-gradient(90deg, #ff7675 0%, #e17055 100%);
+      color: white;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: inherit;
+      box-shadow: 0 2px 8px #ffe0b2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .remove-btn:hover {
+      background: linear-gradient(90deg, #e17055 0%, #ff7675 100%);
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 7px;
+    }
+    .qty-btn {
+      background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+      color: #fff;
+      border: none;
+      padding: 5px 13px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 1px 4px #ffe0b2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .qty-btn:hover {
+      background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+      transform: scale(1.12);
+    }
+    .qty-value {
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #e67e22;
+      font-weight: 700;
+      background: #fffbe6;
+      border-radius: 4px;
+      padding: 2px 6px;
+      border: 1px solid #ffe0b2;
+    }
+    .back-btn, .checkout-btn {
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      margin: 18px 10px 0 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ffe0b2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .back-btn {
+      background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+      color: #fff;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+      transform: scale(1.05);
+    }
+    .checkout-btn {
+      background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+      color: #fff;
+    }
+    .checkout-btn:hover {
+      background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+      transform: scale(1.05);
+    }
+    p {
+      text-align: center;
+      color: #b47b2a;
+      font-size: 1.15rem;
+      margin-top: 30px;
+      animation: fadeIn 1.2s;
+    }
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.9);}
+      80% { opacity: 1; transform: scale(1.04);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    @keyframes foodBounce {
+      0% { transform: scale(0.8);}
+      60% { transform: scale(1.08);}
+      100% { transform: scale(1);}
+    }
+    @media (max-width: 700px) {
+      #cartItems {
+        max-width: 98vw;
+        padding: 10px 2vw;
+      }
+      .cart-item img {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  </style>
+</head>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Keranjang Pesanan</title>
+  <style>
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .cart-item-info {
+      flex-grow: 1;
+    }
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background-color: #c0392b;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .qty-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .qty-btn:hover {
+      background-color: #2980b9;
+    }
+    .qty-value {
+      min-width: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Keranjang Pesanan Kamu</h1>
+  <div id="cartItems"></div>
+  <button onclick="kembaliKeMenu()" class="back-btn">⬅ Kembali ke Menu</button>
+  <button onclick="checkout()" class="checkout-btn">✅ Checkout</button>
+
+
+  <script>
+    let cartItems = JSON.parse(localStorage.getItem('keranjang')) || [];
+    const cartContainer = document.getElementById('cartItems');
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = "<p>Keranjang kosong.</p>";
+        return;
+      }
+
+      cartItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <strong>${item.name}</strong><br>
+            Harga: Rp ${item.price.toLocaleString()}<br>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="ubahJumlah(${index}, -1)">−</button>
+              <span class="qty-value">${item.jumlah}</span>
+              <button class="qty-btn" onclick="ubahJumlah(${index}, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="hapusItem(${index})">Hapus</button>
+        `;
+        cartContainer.appendChild(div);
+      });
+    }
+
+    function hapusItem(index) {
+      if (confirm("Apakah kamu yakin ingin menghapus pesanan ini?")) {
+        cartItems.splice(index, 1);
+        localStorage.setItem('keranjang', JSON.stringify(cartItems));
+        renderCart();
+      }
+    }
+
+    function ubahJumlah(index, perubahan) {
+      const item = cartItems[index];
+      const jumlahBaru = item.jumlah + perubahan;
+      if (jumlahBaru < 1) return; // Minimal jumlah 1
+      item.jumlah = jumlahBaru;
+      localStorage.setItem('keranjang', JSON.stringify(cartItems));
+      renderCart();
+    }
+
+    function kembaliKeMenu() {
+      window.location.href = 'menu.html';
+      }
+    
+    function checkout() {
+      window.location.href = 'checkout.html'; // Ganti dengan nama file checkout kamu
+      }
+
+
+    renderCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - Ateku</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Ateku - Register</h1>
+    <nav>
+      <a href="login.html">Login</a>
+      <a href="index.html">Menu</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Buat Akun Baru</h2>
+    <form action="register_process.php" method="post">
+      <label for="name">Nama Lengkap:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br /><br />
+
+      <button type="submit">Daftar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ateku - Aplikasi Pemesanan ala Mahasiswa</p>
+  </footer>
+</body>
+</html>
